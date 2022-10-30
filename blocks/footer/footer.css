@@ -1,0 +1,10 @@
+.footer {
+  margin-top: 67px;
+  max-width: 880px;
+}
+
+@media screen and (max-width: 928px) {
+  .footer {
+    margin-top: calc(48px + (67 - 48) * ((100vw - 320px) / (928 - 320)));
+  }
+}
