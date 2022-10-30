@@ -13,6 +13,6 @@
   .profile__job {
     font-size: calc(14px + (18 - 14) * ((100vw - 320px) / (700 - 320)));
     line-height: calc(17px + (22 - 17) * ((100vw - 320px) / (700 - 320)));
-    max-width: 282px;
+    max-width: calc(282px + (336 - 282) * ((100vw - 320px) / (700 - 320)));
   }
 }
