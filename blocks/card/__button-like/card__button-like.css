@@ -9,3 +9,10 @@
   cursor: pointer;
   align-self: center;
 }
+
+.card__button-like:hover {
+  opacity: 0.5;
+  transition-property: opacity;
+  transition-duration: 0.5s;
+  transition-timing-function: ease-in;
+}

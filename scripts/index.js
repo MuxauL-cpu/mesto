@@ -20,7 +20,7 @@ let button_close = popup.querySelector('.popup__button-close');
 let nameInput = popup.querySelector('.popup__text_type_name');
 let jobInput = popup.querySelector('.popup__text_type_job');
 
-function btnLikeClick() {
+function btnLikeClick(evt) {
     button_like.classList.toggle('card__button-like_enabled');
 }
 

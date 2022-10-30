@@ -11,6 +11,13 @@
   cursor: pointer;
 }
 
+.profile__button:hover {
+  opacity: 0.6;
+  transition-property: opacity;
+  transition-duration: 0.5s;
+  transition-timing-function: ease-in;
+}
+
 @media screen and (max-width: 700px) {
   .profile__button {
     width: calc(18px + (25 - 18) * ((100vw - 320px) / (700 - 320)));
