@@ -9,5 +9,7 @@
 @media screen and (max-width: 928px) {
   .footer__author {
     margin-left: 19px;
+    font-size: calc(14px + (18 - 14) * ((100vw - 320px) / (928 - 320)));
+    line-height: calc(17px + (22 - 17) * ((100vw - 320px) / (928 - 320)));
   }
 }

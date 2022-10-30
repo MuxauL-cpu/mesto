@@ -9,6 +9,5 @@
   .footer {
     margin-left: 0;
     margin-right: 0;
-    margin-top: calc(48px + (67 - 48) * ((100vw - 320px) / (928 - 320)));
   }
 }
