@@ -1,0 +1,10 @@
+.profile__name-container {
+  display: flex;
+  column-gap: 18px;
+}
+
+@media screen and (max-width: 700px) {
+  .profile__name-container {
+    column-gap: 10px;
+  }
+}
