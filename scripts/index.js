@@ -33,7 +33,6 @@ function formSubmitHandler(evt) {
 }
 
 //привязка функций к кнопкам
-button_like.addEventListener('click', btnLikeClick);
 profile__button.addEventListener('click', formOpenHandler);
 button_submit.addEventListener('click', formSubmitHandler);
 button_close.addEventListener('click', formCloseHandler);
