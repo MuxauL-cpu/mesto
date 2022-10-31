@@ -11,6 +11,5 @@
   .header {
     padding-bottom: calc(31.6px + (41 - 31.6) * ((100vw - 320px) / (928 - 320)));
     padding-top: 28px;
-    padding-bottom: 31.6px;
   }
 }
