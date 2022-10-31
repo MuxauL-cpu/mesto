@@ -22,5 +22,9 @@
   .profile__button {
     width: calc(18px + (25 - 18) * ((100vw - 320px) / (700 - 320)));
     height: calc(18px + (25 - 18) * ((100vw - 320px) / (700 - 320)));
+    position: absolute;
+    background-size: 7.5px 7.5px;
+    top: 8px;
+    right: -28px;
   }
 }

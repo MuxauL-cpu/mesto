@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="./pages/index.css">
   <title>Mesto</title>
 </head>
-<body>
+<body class="root">
   <div class="page">
     <header class="header">
       <img src="images/mesto_logo.svg" class="header__logo" alt="Mesto лого">
@@ -18,54 +18,56 @@
       <section class="profile">
         <img src="images/avatar.png" class="profile__avatar" alt="Аватар профиля">
         <div class="profile__info">
-          <h1 class="profile__name">Жак-Ив Кусто</h1>
-          <button type="submit" class="profile__button"></button>
+          <div class="profile__name-container">
+            <h1 class="profile__name">Жак-Ив Кусто</h1>
+            <button type="button" class="profile__button"></button>
+          </div>
           <p class="profile__job">Исследователь океана</p>
         </div>
-        <button class="profile__button-add"></button>
+        <button type="button" class="profile__button-add"></button>
       </section>
       <section class="photo-grid">
         <ul class="photo-grid__list">
           <li class="card">
             <img src="images/kirill-pershin-1088404-unsplash.png" class="photo-grid__item" alt="Карачаевск фото">
             <div class="card__description-container">
-              <p class="card__description">Карачаевск</p>
+              <h2 class="card__description">Карачаевск</h2>
               <button class="card__button-like"></button>
             </div>
           </li>
           <li class="card">
             <img src="images/kirill-pershin-1404681-unsplash.png" class="photo-grid__item" alt="Гора Эльбрус фото">
             <div class="card__description-container">
-              <p class="card__description">Гора Эльбрус</p>
-              <button class="card__button-like"></button>
+              <h2 class="card__description">Гора Эльбрус</h2>
+              <button type="button" class="card__button-like"></button>
             </div>
           </li>
           <li class="card">
             <img src="images/kirill-pershin-1556355-unsplash.png" class="photo-grid__item" alt="Домбай фото">
             <div class="card__description-container">
-              <p class="card__description">Домбай</p>
-              <button class="card__button-like"></button>
+              <h2 class="card__description">Домбай</h2>
+              <button type="button" class="card__button-like"></button>
             </div>
           </li>
           <li class="card">
             <img src="images/kirill-pershin-1404682-unsplash.png" class="photo-grid__item" alt="Гора Эльбрус фото">
             <div class="card__description-container">
-              <p class="card__description">Гора Эльбрус</p>
-              <button class="card__button-like"></button>
+              <h2 class="card__description">Гора Эльбрус</h2>
+              <button type="button" class="card__button-like"></button>
             </div>
           </li>
           <li class="card">
             <img src="images/kirill-pershin-1556356-unsplash.png" class="photo-grid__item" alt="Домбай фото">
             <div class="card__description-container">
-              <p class="card__description">Домбай</p>
-              <button class="card__button-like"></button>
+              <h2 class="card__description">Домбай</h2>
+              <button type="button" class="card__button-like"></button>
             </div>
           </li>
           <li class="card">
             <img src="images/kirill-pershin-1088405-unsplash.png" class="photo-grid__item" alt="Карачаево-Черкессия фото">
             <div class="card__description-container">
-              <p class="card__description">Карачаево-Черкессия</p>
-              <button class="card__button-like"></button>
+              <h2 class="card__description">Карачаево-Черкессия</h2>
+              <button type="button" class="card__button-like"></button>
             </div>
           </li>
         </ul>
@@ -77,9 +79,11 @@
     <div class="popup">
       <div class="popup__container">
         <h2 class="popup__header">Редактировать профиль</h2>
-        <input class="popup__name-input">
-        <input class="popup__job-input">
-        <button type="submit" class="popup__button-submit">Сохранить</button>
+        <form class="popup__form">
+          <input class="popup__input popup__input_type_name">
+          <input class="popup__input popup__input_type_job">
+          <button type="submit" class="popup__button-submit">Сохранить</button>
+        </form>
         <button type="button" class="popup__button-close"></button>
       </div>
     </div>

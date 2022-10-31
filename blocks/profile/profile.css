@@ -1,13 +1,14 @@
 .profile {
   margin-top: 40px;
   display: flex;
+  flex-flow: nowrap;
+  justify-content: flex-start;
 }
 
 @media screen and (max-width: 700px) {
   .profile {
     margin-top: calc(38.25px + (40 - 38.25) * ((100vw - 320px) / (700 - 320)));
     flex-direction: column;
-    justify-content: center;
     align-items: center;
   }
 }

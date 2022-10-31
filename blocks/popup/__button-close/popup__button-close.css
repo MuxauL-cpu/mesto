@@ -5,8 +5,8 @@
   background-color: transparent;
   background-position: center;
   border-style: none;
-  top: -38px;
-  right: -38px;
+  top: -39px;
+  right: -40px;
   width: 32px;
   height: 32px;
   position: absolute;
@@ -25,5 +25,6 @@
     width: 20px;
     height: 20px;
     right: 0px;
+    top: -37px;
   }
 }

@@ -1,5 +1,6 @@
 .header {
   padding-bottom: 41px;
+  padding-top: 45px;
   margin: 0 auto;
   max-width: 880px;
   border-style: none;
@@ -9,5 +10,6 @@
 @media screen and (max-width: 928px) {
   .header {
     padding-bottom: calc(31.6px + (41 - 31.6) * ((100vw - 320px) / (928 - 320)));
+    padding-top: 28px;
   }
 }
