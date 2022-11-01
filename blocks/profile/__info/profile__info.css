@@ -9,7 +9,6 @@
   .profile__info {
     margin-top: 0;
     align-self: center;
-    max-width: calc(100% - 56px);
     flex-shrink: 0;
     column-gap: 10px;
     text-align: center;
