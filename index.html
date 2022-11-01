@@ -32,7 +32,7 @@
             <img src="images/kirill-pershin-1088404-unsplash.png" class="photo-grid__item" alt="Карачаевск фото">
             <div class="card__description-container">
               <h2 class="card__description">Карачаевск</h2>
-              <button class="card__button-like"></button>
+              <button type="button" class="card__button-like"></button>
             </div>
           </li>
           <li class="card">
@@ -79,9 +79,9 @@
     <div class="popup">
       <div class="popup__container">
         <h2 class="popup__header">Редактировать профиль</h2>
-        <form class="popup__form">
-          <input class="popup__input popup__input_type_name">
-          <input class="popup__input popup__input_type_job">
+        <form class="popup__form" name="popupForm">
+          <input class="popup__input popup__input_type_name" name="UserName">
+          <input class="popup__input popup__input_type_job" name="UserJob">
           <button type="submit" class="popup__button-submit">Сохранить</button>
         </form>
         <button type="button" class="popup__button-close"></button>

@@ -29,7 +29,7 @@ function formSubmitHandler(evt) {
   UserName.textContent = nameInput.value;
   UserJob.textContent = jobInput.value;
 
-  popup.classList.remove('popup_opened');
+  formCloseHandler();
 }
 
 //привязка функций к кнопкам

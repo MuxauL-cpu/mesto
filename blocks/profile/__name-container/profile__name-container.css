@@ -7,8 +7,10 @@
 }
 
 @media screen and (max-width: 700px) {
-    .profile__name-container {
-      display: block;
-      text-align: center;
-    }
+  .profile__name-container {
+    justify-content: center;
+    text-align: center;
+    column-gap: 10px;
+    margin-left: 26px;
   }
+}
