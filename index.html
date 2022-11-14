@@ -28,55 +28,14 @@
       </section>
       <section class="photo-grid">
         <ul class="photo-grid__list">
-          <li class="card">
-            <img src="images/kirill-pershin-1088404-unsplash.png" class="photo-grid__item" alt="Карачаевск фото">
-            <div class="card__description-container">
-              <h2 class="card__description">Карачаевск</h2>
-              <button type="button" class="card__button-like"></button>
-            </div>
-          </li>
-          <li class="card">
-            <img src="images/kirill-pershin-1404681-unsplash.png" class="photo-grid__item" alt="Гора Эльбрус фото">
-            <div class="card__description-container">
-              <h2 class="card__description">Гора Эльбрус</h2>
-              <button type="button" class="card__button-like"></button>
-            </div>
-          </li>
-          <li class="card">
-            <img src="images/kirill-pershin-1556355-unsplash.png" class="photo-grid__item" alt="Домбай фото">
-            <div class="card__description-container">
-              <h2 class="card__description">Домбай</h2>
-              <button type="button" class="card__button-like"></button>
-            </div>
-          </li>
-          <li class="card">
-            <img src="images/kirill-pershin-1404682-unsplash.png" class="photo-grid__item" alt="Гора Эльбрус фото">
-            <div class="card__description-container">
-              <h2 class="card__description">Гора Эльбрус</h2>
-              <button type="button" class="card__button-like"></button>
-            </div>
-          </li>
-          <li class="card">
-            <img src="images/kirill-pershin-1556356-unsplash.png" class="photo-grid__item" alt="Домбай фото">
-            <div class="card__description-container">
-              <h2 class="card__description">Домбай</h2>
-              <button type="button" class="card__button-like"></button>
-            </div>
-          </li>
-          <li class="card">
-            <img src="images/kirill-pershin-1088405-unsplash.png" class="photo-grid__item" alt="Карачаево-Черкессия фото">
-            <div class="card__description-container">
-              <h2 class="card__description">Карачаево-Черкессия</h2>
-              <button type="button" class="card__button-like"></button>
-            </div>
-          </li>
         </ul>
       </section>
     </main>
     <footer class="footer">
       <p class="footer__author">© 2022 Максименко Михаил</p>
     </footer>
-    <div class="popup">
+    <!--popup для редактирования информации профиля-->
+    <section class="popup popup__user">
       <div class="popup__container">
         <h2 class="popup__header">Редактировать профиль</h2>
         <form class="popup__form" name="popupForm">
@@ -86,8 +45,39 @@
         </form>
         <button type="button" class="popup__button-close"></button>
       </div>
-    </div>
+    </section>
+    <!--popup для добавления карточек-->
+    <section class="popup popup__card-editor">
+      <div class="popup__container">
+        <h2 class="popup__header">Новое место</h2>
+        <form class="popup__form popup__form_type_cards" name="popupCardsForm">
+          <input class="popup__input popup__input_type_description" name="imageDescription">
+          <input class="popup__input popup__input_type_link" name="imageLink">
+          <button type="submit" class="popup__button-submit popup__button-submit_type_cards">Создать</button>
+        </form>
+        <button type="button" class="popup__button-close"></button>
+      </div>
+    </section>
+    <!--popup который открывает карточку-->
+    <section class="popup popup__open-image">
+      <figure class="popup__figure">
+        <button type="button" class="popup__button-close"></button>
+        <img src="#" class="popup__image">
+        <figcaption class="popup__figcaption"></figcaption>
+      </figure>
+    </section>
   </div>
+  <!--шаблон для создания каточек-->
+  <template id="elements">
+    <li class="elements__card">
+      <img src="#" class="elements__image" alt="">
+      <button class="elements__delete-button"></button>
+      <div class="elements__description-container">
+        <h2 class="elements__description-title"></h2>
+        <button type="button" class="elements__button-like"></button>
+      </div>
+    </li>
+  </template>
   <script src="scripts/index.js"></script>
 </body>
 </html>
