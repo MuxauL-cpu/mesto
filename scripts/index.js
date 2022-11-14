@@ -7,21 +7,21 @@ const UserName = content.querySelector('.profile__name');
 const UserJob = content.querySelector('.profile__job');
 
 //определение переменных pop-up, кнопки сохранения, закрыть. Переменные для изменения имени и работы пользователя
-const popup = document.querySelector('.popup__type_user');
+const popup = document.querySelector('.popup_type_user');
 const popupForm = popup.querySelector('.popup__form');
 const buttonClose = popup.querySelector('.popup__button-close');
 const nameInput = popup.querySelector('.popup__input_type_name');
 const jobInput = popup.querySelector('.popup__input_type_job');
 
 //определение переменных для pop-up, который добавляет картинки
-const popupCards = document.querySelector('.popup__type_card-editor');
+const popupCards = document.querySelector('.popup_type_card-editor');
 const popupCardsForm = popupCards.querySelector('.popup__form_type_cards');
 const buttonCardsClose = popupCards.querySelector('.popup__button-close');
 const imageDescription = popupCards.querySelector('.popup__input_type_description');
 const imageLink = popupCards.querySelector('.popup__input_type_link');
 
 //определение переменных для popup, который открывает карточки
-const popupOpenImage = document.querySelector('.popup__type_open-image');
+const popupOpenImage = document.querySelector('.popup_type_open-image');
 const popupImage = popupOpenImage.querySelector('.popup__image');
 const popupCaption = popupOpenImage.querySelector('.popup__figcaption');
 const popupCloseImage = popupOpenImage.querySelector('.popup__button-close');
@@ -123,20 +123,18 @@ function cardsFormOpenHandler() {
   imageLink.value = 'Ссылка на картинку';
 }
 
+function cardsFormCloseHandler() {
+  popupClose(popupCards);
+}
+
 const cardsFormSubmitHandler = (evt) => {
   evt.preventDefault();
   cardRender({ 
     name: imageDescription.value,
     link: imageLink.value
   })
-  imageDescription.value = 'Название';
-  imageLink.value = 'Ссылка на картинку';
   cardsFormCloseHandler();
 };
-
-function cardsFormCloseHandler() {
-  popupClose(popupCards);
-}
 
 function formCloseHandler() {
   popupClose(popup);
