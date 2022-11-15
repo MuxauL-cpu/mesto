@@ -3,157 +3,131 @@ const profileButton = content.querySelector('.profile__button');
 const newCardButton = content.querySelector('.profile__button-add');
 
 //переменные для вставки в pop-up при открытии
-const UserName = content.querySelector('.profile__name');
-const UserJob = content.querySelector('.profile__job');
+const userName = content.querySelector('.profile__name');
+const userJob = content.querySelector('.profile__job');
 
 //определение переменных pop-up, кнопки сохранения, закрыть. Переменные для изменения имени и работы пользователя
-const popup = document.querySelector('.popup_type_user');
-const popupForm = popup.querySelector('.popup__form');
-const buttonClose = popup.querySelector('.popup__button-close');
-const nameInput = popup.querySelector('.popup__input_type_name');
-const jobInput = popup.querySelector('.popup__input_type_job');
+const popupUser = document.querySelector('.popup_type_user');
+const popupUserForm = popupUser.querySelector('.popup__form');
+const nameInput = popupUser.querySelector('.popup__input_type_name');
+const jobInput = popupUser.querySelector('.popup__input_type_job');
 
 //определение переменных для pop-up, который добавляет картинки
-const popupCards = document.querySelector('.popup_type_card-editor');
-const popupCardsForm = popupCards.querySelector('.popup__form_type_cards');
-const buttonCardsClose = popupCards.querySelector('.popup__button-close');
-const imageDescription = popupCards.querySelector('.popup__input_type_description');
-const imageLink = popupCards.querySelector('.popup__input_type_link');
+const popupAddCard = document.querySelector('.popup_type_card-editor');
+const popupAddCardForm = popupAddCard.querySelector('.popup__form_type_cards');
+const imageDescription = popupAddCard.querySelector('.popup__input_type_description');
+const imageLink = popupAddCard.querySelector('.popup__input_type_link');
 
 //определение переменных для popup, который открывает карточки
 const popupOpenImage = document.querySelector('.popup_type_open-image');
 const popupImage = popupOpenImage.querySelector('.popup__image');
 const popupCaption = popupOpenImage.querySelector('.popup__figcaption');
-const popupCloseImage = popupOpenImage.querySelector('.popup__button-close');
 
 //при нажатии открывает форму и подаставляет имя пользователя и работу в поля ввода
-const popupOpen = (item) => {
+const openPopup = (item) => {
   item.classList.add('popup_opened');
 };
 
-const popupClose = (item) => {
+const closePopup = (item) => {
   item.classList.remove('popup_opened');
 };
-
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-]; 
 
 const PhotoGridList = content.querySelector('.photo-grid__list');
 
 const cardTemplate = document.querySelector('#elements').content.querySelector('.elements__card');
 
-const generateCard = (dataCard) => {
+const generateCard = (cardData) => {
   const newCard = cardTemplate.cloneNode(true);
 
   const cardImage = newCard.querySelector('.elements__image');
-  cardImage.src = dataCard.link;
+  cardImage.src = cardData.link;
+  cardImage.alt = cardData.name;
 
   const cardDescription = newCard.querySelector('.elements__description-container');
 
   const cardTitle = newCard.querySelector('.elements__description-title');
-  cardTitle.textContent = dataCard.name;
+  cardTitle.textContent = cardData.name;
 
-  const cardDelete = newCard.querySelector('.elements__delete-button').addEventListener('click', function(evt) {
-    evt.currentTarget.closest('.elements__card').remove();
+  newCard.querySelector('.elements__delete-button').addEventListener('click', function(evt) {
+    newCard.remove();
   });
 
-  const cardLike = newCard.querySelector('.elements__button-like').addEventListener('click', function(evt) {
+  newCard.querySelector('.elements__button-like').addEventListener('click', function(evt) {
     evt.target.classList.toggle('elements__button-like_enabled');
   });
 
-  const imageFormOpenHandler = () => {
+  const openImageFormHandler = () => {
     popupImage.src = cardImage.src;
-    popupImage.alt = cardTitle.textContent;
     popupCaption.textContent = cardTitle.textContent;
 
-    popupOpen(popupOpenImage);
+    openPopup(popupOpenImage);
   };
 
-  const imageCloseHandler = () => {
-    popupClose(popupOpenImage);
-  }
-
-  cardImage.addEventListener('click', imageFormOpenHandler);
-  popupCloseImage.addEventListener('click', imageCloseHandler);
+  cardImage.addEventListener('click', openImageFormHandler);
 
   return newCard;
 }
 
-const cardRender = (dataCard) => {
-  PhotoGridList.prepend(generateCard(dataCard));
+const renderCard = (cardData) => {
+  PhotoGridList.prepend(generateCard(cardData));
 }
 
-initialCards.forEach((dataCard) => {
-  cardRender(dataCard);
-});
+initialCards.forEach(renderCard);
 
-function profileFormOpenHandler() {
-  popupOpen(popup);
-  nameInput.value = UserName.textContent;
-  jobInput.value = UserJob.textContent;
+function openProfileFormHandler() {
+  openPopup(popupUser);
+  nameInput.value = userName.textContent;
+  jobInput.value = userJob.textContent;
 }
 
-function cardsFormOpenHandler() {
-  popupOpen(popupCards);
-  imageDescription.value = 'Название';
-  imageLink.value = 'Ссылка на картинку';
+function openAddCardFormHandler() {
+  openPopup(popupAddCard);
+  imageDescription.value = '';
+  imageLink.value = '';
 }
 
-function cardsFormCloseHandler() {
-  popupClose(popupCards);
-}
-
-const cardsFormSubmitHandler = (evt) => {
+const submitAddCardFormHandler = (evt) => {
   evt.preventDefault();
-  cardRender({ 
+  renderCard({ 
     name: imageDescription.value,
     link: imageLink.value
   })
-  cardsFormCloseHandler();
+  closeAddCardFormHandler();
 };
-
-function formCloseHandler() {
-  popupClose(popup);
-}
   
-function formSubmitHandler(evt) {
+function submitPopupUserFormHandler(evt) {
   evt.preventDefault();
 
-  UserName.textContent = nameInput.value;
-  UserJob.textContent = jobInput.value;
+  userName.textContent = nameInput.value;
+  userJob.textContent = jobInput.value;
 
-  formCloseHandler();
+  closePopupUserFormHandler();
+}
+
+//определение переменных для кнопок закрытия
+const buttonClose = popupUser.querySelector('.popup__button-close');
+const popupCloseImage = popupOpenImage.querySelector('.popup__button-close');
+const buttonCardsClose = popupAddCard.querySelector('.popup__button-close');
+
+function closeAddCardFormHandler() {
+  closePopup(popupAddCard);
+}
+
+function closePopupUserFormHandler() {
+  closePopup(popupUser);
+}
+
+const сloseImageHandler = () => {
+  closePopup(popupOpenImage);
 }
 
 //привязка функций к кнопкам
-profileButton.addEventListener('click', profileFormOpenHandler);
-popupForm.addEventListener('submit', formSubmitHandler);
-buttonClose.addEventListener('click', formCloseHandler);
+profileButton.addEventListener('click', openProfileFormHandler);
+popupUserForm.addEventListener('submit', submitPopupUserFormHandler);
 
-newCardButton.addEventListener('click', cardsFormOpenHandler);
-popupCardsForm.addEventListener('submit', cardsFormSubmitHandler);
-buttonCardsClose.addEventListener('click', cardsFormCloseHandler);
+newCardButton.addEventListener('click', openAddCardFormHandler);
+popupAddCardForm.addEventListener('submit', submitAddCardFormHandler);
+
+popupCloseImage.addEventListener('click', сloseImageHandler);
+buttonClose.addEventListener('click', closePopupUserFormHandler);
+buttonCardsClose.addEventListener('click', closeAddCardFormHandler);
