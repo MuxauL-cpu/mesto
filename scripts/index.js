@@ -32,7 +32,7 @@ const closePopup = (item) => {
   item.classList.remove('popup_opened');
 };
 
-const PhotoGridList = content.querySelector('.photo-grid__list');
+const photoGridList = content.querySelector('.photo-grid__list');
 
 const cardTemplate = document.querySelector('#elements').content.querySelector('.elements__card');
 
@@ -69,7 +69,7 @@ const generateCard = (cardData) => {
 }
 
 const renderCard = (cardData) => {
-  PhotoGridList.prepend(generateCard(cardData));
+  photoGridList.prepend(generateCard(cardData));
 }
 
 initialCards.forEach(renderCard);
