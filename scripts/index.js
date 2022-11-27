@@ -121,7 +121,19 @@ const сloseImageHandler = () => {
   closePopup(popupOpenImage);
 }
 
+//функция закрытия формы по клику на оверлей
+const closeModal = (event) => {
+  const target = event.target;
+  if ((target === popupUser) || (target === popupAddCard) || (target === popupOpenImage)) {
+    closePopup(target);
+  }
+}
+
 //привязка функций к кнопкам
+popupUser.addEventListener('click', closeModal);
+popupAddCard.addEventListener('click', closeModal);
+popupOpenImage.addEventListener('click', closeModal);
+
 profileButton.addEventListener('click', openProfileFormHandler);
 popupUserForm.addEventListener('submit', submitPopupUserFormHandler);
 

@@ -11,4 +11,5 @@
   background-color: rgba(0, 0, 0, .7);
   opacity: 0;
   transition: visibility .3s, opacity, .3s;
+  cursor: pointer;
 }
