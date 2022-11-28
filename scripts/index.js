@@ -23,13 +23,22 @@ const popupOpenImage = document.querySelector('.popup_type_open-image');
 const popupImage = popupOpenImage.querySelector('.popup__image');
 const popupCaption = popupOpenImage.querySelector('.popup__figcaption');
 
+const closeEscHandler = (evt) => {
+  if (evt.key === 'Escape') {
+    const popupOpened = document.querySelector('.popup_opened');
+    closePopup(popupOpened);
+  }
+};
+
 //при нажатии открывает форму и подаставляет имя пользователя и работу в поля ввода
 const openPopup = (item) => {
   item.classList.add('popup_opened');
+  document.addEventListener('keydown', closeEscHandler);
 };
 
 const closePopup = (item) => {
   item.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closeEscHandler);
 };
 
 const photoGridList = content.querySelector('.photo-grid__list');
