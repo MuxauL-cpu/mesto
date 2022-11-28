@@ -86,6 +86,7 @@ function openAddCardFormHandler() {
   imageLink.value = '';
 }
 
+
 const submitAddCardFormHandler = (evt) => {
   evt.preventDefault();
   renderCard({ 

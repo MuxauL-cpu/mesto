@@ -12,12 +12,10 @@
   box-sizing: border-box;
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, .2);
-  margin-bottom: 24px;
 }
 
 @media screen and (max-width: 510px) {
   .popup__input {
     vertical-align: baseline;
-    margin-bottom: 27px;
   }
 }

@@ -39,10 +39,13 @@
       <div class="popup__container">
         <h2 class="popup__header">Редактировать профиль</h2>
         <form class="popup__form" name="popupForm" novalidate>
-          <input class="popup__input popup__input_type_name" placeholder="Имя" name="UserName" id="user-name" minlength="2" maxlength="40" required>
-          <span class="user-name-error popup__input-error"></span>
-          <input class="popup__input popup__input_type_job" placeholder="О себе" name="UserJob" id="user-job" minlength="2" maxlength="200" required>
-          <span class="user-job-error popup__input-error"></span>
+          <label for="user-name" class="popup__label"></label>
+            <input class="popup__input popup__input_type_name" placeholder="Имя" name="UserName" id="user-name" minlength="2" maxlength="40" required>
+            <p class="user-name-error popup__input-error"></p>
+          <label for="user-job" class="popup__label">
+            <input class="popup__input popup__input_type_job" placeholder="О себе" name="UserJob" id="user-job" minlength="2" maxlength="200" required>
+            <p class="user-job-error popup__input-error"></p>
+          </label>
           <button type="submit" class="popup__button-submit">Сохранить</button>
         </form>
         <button type="button" aria-label="Закрыть" class="popup__button-close"></button>
@@ -53,10 +56,14 @@
       <div class="popup__container">
         <h2 class="popup__header">Новое место</h2>
         <form class="popup__form popup__form_type_cards" name="popupCardsForm" novalidate>
-          <input class="popup__input popup__input_type_description" placeholder="Название" name="imageDescription" id="image-description" minlength="2" maxlength="30" required>
-          <span class="image-description-error popup__input-error"></span>
-          <input class="popup__input popup__input_type_link" type="url" placeholder="Ссылка на картинку" name="imageLink" id="image-link" required>
-          <span class="image-link-error popup__input-error"></span>
+          <label for="image-description" class="popup__label">
+            <input class="popup__input popup__input_type_description" placeholder="Название" name="imageDescription" id="image-description" minlength="2" maxlength="30" required>
+            <p class="image-description-error popup__input-error"></p>
+          </label>
+          <label for="image-link" class="popup__label">
+            <input class="popup__input popup__input_type_link" type="url" placeholder="Ссылка на картинку" name="imageLink" id="image-link" required>
+            <p class="image-link-error popup__input-error"></p>
+          </label>
           <button type="submit" class="popup__button-submit popup__button-submit_type_cards">Создать</button>
         </form>
         <button type="button" aria-label="Закрыть" class="popup__button-close"></button>
