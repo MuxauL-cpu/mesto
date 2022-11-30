@@ -110,6 +110,20 @@ function openAddCardFormHandler() {
   imageLink.value = '';
 }
 
+const submitEnterKeyHandler = (evt) => {
+  if (evt.key === 'Enter') {
+    switch(evt.target) {
+      case popupUser:
+        submitPopupUserFormHandler(evt);
+        closePopupUserFormHandler();
+        break;
+      case popupAddCard:
+        submitAddCardFormHandler(evt);
+        closeAddCardFormHandler();
+        break;
+    }
+  }
+};
 
 const submitAddCardFormHandler = (evt) => {
   evt.preventDefault();
@@ -149,9 +163,11 @@ const сloseImageHandler = () => {
 //привязка функций к кнопкам
 profileButton.addEventListener('click', openProfileFormHandler);
 popupUserForm.addEventListener('submit', submitPopupUserFormHandler);
+popupUserForm.addEventListener('keydown', submitEnterKeyHandler);
 
 newCardButton.addEventListener('click', openAddCardFormHandler);
 popupAddCardForm.addEventListener('submit', submitAddCardFormHandler);
+popupAddCardForm.addEventListener('keydown', submitEnterKeyHandler);
 
 popupCloseImage.addEventListener('click', сloseImageHandler);
 buttonClose.addEventListener('click', closePopupUserFormHandler);
