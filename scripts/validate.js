@@ -40,10 +40,6 @@ const setEventListeners = (formElement) => {
       checkInputValidity(formElement, inputElement);
       toggleButtonState(inputList, buttonElement);
     });
-    inputElement.addEventListener('submit', function() {
-      checkInputValidity(formElement, inputElement);
-      toggleButtonState(inputList, buttonElement);
-    });
   });
 };
 
@@ -75,17 +71,9 @@ function toggleButtonState(inputList, buttonElement) {
 
 const hideError = (formElement) => {
   const inputList = Array.from(formElement.querySelectorAll(enableValidation.inputSelector));
-  const errorElement = formElement.querySelectorAll(enableValidation.inputErrorClass);
 
-
-  inputList.forEach((item) => {
-    console.log(item);
-    item.classList.remove(enableValidation.errorClass);
-  });
-
-  errorElement.forEach((item) => {
-    console.log(item);
-    item.classList.remove(enableValidation.errorClass);
+  inputList.forEach((inputElement) => {
+    hideInputError(formElement, inputElement);
   });
 };
 
