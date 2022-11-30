@@ -9,12 +9,14 @@ const userJob = content.querySelector('.profile__job');
 //определение переменных pop-up, кнопки сохранения, закрыть. Переменные для изменения имени и работы пользователя
 const popupUser = document.querySelector('.popup_type_user');
 const popupUserForm = popupUser.querySelector('.popup__form');
+const userButtonSubmit = '.popup__button-submit_type_user';
 const nameInput = popupUser.querySelector('.popup__input_type_name');
 const jobInput = popupUser.querySelector('.popup__input_type_job');
 
 //определение переменных для pop-up, который добавляет картинки
 const popupAddCard = document.querySelector('.popup_type_card-editor');
 const popupAddCardForm = popupAddCard.querySelector('.popup__form_type_cards');
+const cardButtonSubmit = '.popup__button-submit_type_cards';
 const imageDescription = popupAddCard.querySelector('.popup__input_type_description');
 const imageLink = popupAddCard.querySelector('.popup__input_type_link');
 
@@ -23,6 +25,7 @@ const popupOpenImage = document.querySelector('.popup_type_open-image');
 const popupImage = popupOpenImage.querySelector('.popup__image');
 const popupCaption = popupOpenImage.querySelector('.popup__figcaption');
 
+//функция закрытия формы по кнопке esc
 const closeEscHandler = (evt) => {
   if (evt.key === 'Escape') {
     const popupOpened = document.querySelector('.popup_opened');
@@ -30,15 +33,27 @@ const closeEscHandler = (evt) => {
   }
 };
 
+//функция закрытия формы по клику на оверлей
+const closePopupOverlay = (event) => {
+  if (event.target !== event.currentTarget) {
+    return;
+  }
+  closePopup(event.target);
+}
+
 //при нажатии открывает форму и подаставляет имя пользователя и работу в поля ввода
 const openPopup = (item) => {
   item.classList.add('popup_opened');
   document.addEventListener('keydown', closeEscHandler);
+  item.addEventListener('click', closePopupOverlay);
+  hideError(item);
+  resetValidation(item);
 };
 
 const closePopup = (item) => {
   item.classList.remove('popup_opened');
   document.removeEventListener('keydown', closeEscHandler);
+  item.removeEventListener('click', closePopupOverlay);
 };
 
 const photoGridList = content.querySelector('.photo-grid__list');
@@ -131,19 +146,7 @@ const сloseImageHandler = () => {
   closePopup(popupOpenImage);
 }
 
-//функция закрытия формы по клику на оверлей
-const closeModal = (event) => {
-  const target = event.target;
-  if ((target === popupUser) || (target === popupAddCard) || (target === popupOpenImage)) {
-    closePopup(target);
-  }
-}
-
 //привязка функций к кнопкам
-popupUser.addEventListener('click', closeModal);
-popupAddCard.addEventListener('click', closeModal);
-popupOpenImage.addEventListener('click', closeModal);
-
 profileButton.addEventListener('click', openProfileFormHandler);
 popupUserForm.addEventListener('submit', submitPopupUserFormHandler);
 

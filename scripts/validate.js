@@ -3,7 +3,7 @@ const enableValidation = {
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__button-submit',
   inactiveButtonClass: 'popup__button-submit_inactive',
-  inputErrorClass: 'popup__input_type_error',
+  inputErrorClass: 'popup__input_type-error',
   errorClass: 'popup__input-error_active'
 }; 
 
@@ -33,13 +33,18 @@ const setEventListeners = (formElement) => {
   const inputList = Array.from(formElement.querySelectorAll(enableValidation.inputSelector));
   const buttonElement = formElement.querySelector(enableValidation.submitButtonSelector);
 
+  toggleButtonState(inputList, buttonElement);
+  
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', function() {
       checkInputValidity(formElement, inputElement);
       toggleButtonState(inputList, buttonElement);
     });
+    inputElement.addEventListener('submit', function() {
+      checkInputValidity(formElement, inputElement);
+      toggleButtonState(inputList, buttonElement);
+    });
   });
-  toggleButtonState(inputList, buttonElement);
 };
 
 function isValid(popupForm) {
@@ -67,5 +72,31 @@ function toggleButtonState(inputList, buttonElement) {
     buttonElement.classList.remove(enableValidation.inactiveButtonClass);
   }
 }
+
+const hideError = (formElement) => {
+  const inputList = Array.from(formElement.querySelectorAll(enableValidation.inputSelector));
+  const errorElement = formElement.querySelectorAll(enableValidation.inputErrorClass);
+
+
+  inputList.forEach((item) => {
+    console.log(item);
+    item.classList.remove(enableValidation.errorClass);
+  });
+
+  errorElement.forEach((item) => {
+    console.log(item);
+    item.classList.remove(enableValidation.errorClass);
+  });
+};
+
+const resetValidation = (item) => {
+  if (item === popupUser) {
+    const formSubmit = document.querySelector(userButtonSubmit);
+    formSubmit.classList.remove(enableValidation.inactiveButtonClass);
+  } else {
+    const formSubmit = document.querySelector(cardButtonSubmit);
+    formSubmit.classList.add(enableValidation.inactiveButtonClass);
+  }
+};
 
 isValid(enableValidation);
