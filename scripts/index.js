@@ -9,14 +9,14 @@ const userJob = content.querySelector('.profile__job');
 //определение переменных pop-up, кнопки сохранения, закрыть. Переменные для изменения имени и работы пользователя
 const popupUser = document.querySelector('.popup_type_user');
 const popupUserForm = popupUser.querySelector('.popup__form');
-const userButtonSubmit = '.popup__button-submit_type_user';
+const userButtonSubmit = popupUser.querySelector('.popup__button-submit_type_user');
 const nameInput = popupUser.querySelector('.popup__input_type_name');
 const jobInput = popupUser.querySelector('.popup__input_type_job');
 
 //определение переменных для pop-up, который добавляет картинки
 const popupAddCard = document.querySelector('.popup_type_card-editor');
 const popupAddCardForm = popupAddCard.querySelector('.popup__form_type_cards');
-const cardButtonSubmit = '.popup__button-submit_type_cards';
+const cardButtonSubmit = popupAddCard.querySelector('.popup__button-submit_type_cards');
 const imageDescription = popupAddCard.querySelector('.popup__input_type_description');
 const imageLink = popupAddCard.querySelector('.popup__input_type_link');
 
@@ -26,7 +26,7 @@ const popupImage = popupOpenImage.querySelector('.popup__image');
 const popupCaption = popupOpenImage.querySelector('.popup__figcaption');
 
 //функция закрытия формы по кнопке esc
-const closeEscHandler = (evt) => {
+const handleEscClick = (evt) => {
   if (evt.key === 'Escape') {
     const popupOpened = document.querySelector('.popup_opened');
     closePopup(popupOpened);
@@ -42,21 +42,19 @@ const closePopupOverlay = (event) => {
 }
 
 //при нажатии открывает форму и подаставляет имя пользователя и работу в поля ввода
-const openPopup = (item) => {
-  item.classList.add('popup_opened');
-  document.addEventListener('keydown', closeEscHandler);
-  item.addEventListener('click', closePopupOverlay);
-  hideError(item);
-  resetValidation(item);
+const openPopup = (popup) => {
+  popup.classList.add('popup_opened');
+  document.addEventListener('keydown', handleEscClick);
+  popup.addEventListener('click', closePopupOverlay);
 };
 
-const closePopup = (item) => {
-  item.classList.remove('popup_opened');
-  document.removeEventListener('keydown', closeEscHandler);
-  item.removeEventListener('click', closePopupOverlay);
+const closePopup = (popup) => {
+  popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', handleEscClick);
+  popup.removeEventListener('click', closePopupOverlay);
 };
 
-const photoGridList = content.querySelector('.photo-grid__list');
+const cardsContainer = content.querySelector('.photo-grid__list');
 
 const cardTemplate = document.querySelector('#elements').content.querySelector('.elements__card');
 
@@ -67,80 +65,68 @@ const generateCard = (cardData) => {
   cardImage.src = cardData.link;
   cardImage.alt = cardData.name;
 
-  const cardDescription = newCard.querySelector('.elements__description-container');
-
   const cardTitle = newCard.querySelector('.elements__description-title');
   cardTitle.textContent = cardData.name;
+
+  const likeButton = newCard.querySelector('.elements__button-like');
+  likeButton.addEventListener('click', () => {
+    likeButton.classList.toggle('elements__button-like_enabled');
+  });
 
   newCard.querySelector('.elements__delete-button').addEventListener('click', function(evt) {
     newCard.remove();
   });
 
-  newCard.querySelector('.elements__button-like').addEventListener('click', function(evt) {
-    evt.target.classList.toggle('elements__button-like_enabled');
-  });
-
-  const openImageFormHandler = () => {
+  const handleOpenImageForm = () => {
     popupImage.src = cardImage.src;
+    popupImage.alt = cardImage.alt;
     popupCaption.textContent = cardTitle.textContent;
 
     openPopup(popupOpenImage);
   };
 
-  cardImage.addEventListener('click', openImageFormHandler);
+  cardImage.addEventListener('click', handleOpenImageForm);
 
   return newCard;
 }
 
 const renderCard = (cardData) => {
-  photoGridList.prepend(generateCard(cardData));
+  cardsContainer.prepend(generateCard(cardData));
 }
 
 initialCards.forEach(renderCard);
 
-function openProfileFormHandler() {
+function handleOpenProfileForm() {
   openPopup(popupUser);
   nameInput.value = userName.textContent;
   jobInput.value = userJob.textContent;
+  hideErrors(popupUser, validationConfig.inputSelector);
+  disableSubmitButton(userButtonSubmit, validationConfig.inactiveButtonClass);
 }
 
-function openAddCardFormHandler() {
+function handleOpenAddCardForm() {
   openPopup(popupAddCard);
-  imageDescription.value = '';
-  imageLink.value = '';
+  popupAddCardForm.reset();
+  hideErrors(popupAddCard, validationConfig.inputSelector);
+  disableSubmitButton(cardButtonSubmit, validationConfig.inactiveButtonClass);
 }
 
-const submitEnterKeyHandler = (evt) => {
-  if (evt.key === 'Enter') {
-    switch(evt.target) {
-      case popupUser:
-        submitPopupUserFormHandler(evt);
-        closePopupUserFormHandler();
-        break;
-      case popupAddCard:
-        submitAddCardFormHandler(evt);
-        closeAddCardFormHandler();
-        break;
-    }
-  }
-};
-
-const submitAddCardFormHandler = (evt) => {
+const handleSubmitAddCardForm = (evt) => {
   evt.preventDefault();
   renderCard({ 
     name: imageDescription.value,
     link: imageLink.value
-  })
-  closeAddCardFormHandler();
+  });
+  handleCloseAddCardForm();
 };
   
-function submitPopupUserFormHandler(evt) {
+function handleSubmitPopupUserForm(evt) {
   evt.preventDefault();
 
   userName.textContent = nameInput.value;
   userJob.textContent = jobInput.value;
 
-  closePopupUserFormHandler();
+  handlerClosePopupUserForm();
 }
 
 //определение переменных для кнопок закрытия
@@ -148,27 +134,27 @@ const buttonClose = popupUser.querySelector('.popup__button-close');
 const popupCloseImage = popupOpenImage.querySelector('.popup__button-close');
 const buttonCardsClose = popupAddCard.querySelector('.popup__button-close');
 
-function closeAddCardFormHandler() {
+function handleCloseAddCardForm() {
   closePopup(popupAddCard);
+  disableSubmitButton(cardButtonSubmit, validationConfig.inactiveButtonClass);
 }
 
-function closePopupUserFormHandler() {
+function handlerClosePopupUserForm() {
   closePopup(popupUser);
+  disableSubmitButton(userButtonSubmit, validationConfig.inactiveButtonClass);
 }
 
-const сloseImageHandler = () => {
+const handleCloseImage = () => {
   closePopup(popupOpenImage);
 }
 
 //привязка функций к кнопкам
-profileButton.addEventListener('click', openProfileFormHandler);
-popupUserForm.addEventListener('submit', submitPopupUserFormHandler);
-popupUserForm.addEventListener('keydown', submitEnterKeyHandler);
+profileButton.addEventListener('click', handleOpenProfileForm);
+popupUserForm.addEventListener('submit', handleSubmitPopupUserForm);
 
-newCardButton.addEventListener('click', openAddCardFormHandler);
-popupAddCardForm.addEventListener('submit', submitAddCardFormHandler);
-popupAddCardForm.addEventListener('keydown', submitEnterKeyHandler);
+newCardButton.addEventListener('click', handleOpenAddCardForm);
+popupAddCardForm.addEventListener('submit', handleSubmitAddCardForm);
 
-popupCloseImage.addEventListener('click', сloseImageHandler);
-buttonClose.addEventListener('click', closePopupUserFormHandler);
-buttonCardsClose.addEventListener('click', closeAddCardFormHandler);
+popupCloseImage.addEventListener('click', handleCloseImage);
+buttonClose.addEventListener('click', handlerClosePopupUserForm);
+buttonCardsClose.addEventListener('click', handleCloseAddCardForm);
