@@ -7,25 +7,25 @@ const validationConfig = {
   errorClass: 'popup__input-error_active'
 }; 
 
-const showInputError = (formElement, inputElement, errorMessage, inputErrorClass, errorClass) => {
+const showInputError = (formElement, inputElement, errorMessage, config) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add(inputErrorClass);
+  inputElement.classList.add(config.inputErrorClass);
   errorElement.textContent = errorMessage;
-  errorElement.classList.add(errorClass);
+  errorElement.classList.add(config.errorClass);
 };
 
-const hideInputError = (formElement, inputElement, inputErrorClass, errorClass) => {
+const hideInputError = (formElement, inputElement, config) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove(inputErrorClass);
-  errorElement.classList.remove(errorClass);
+  inputElement.classList.remove(config.inputErrorClass);
+  errorElement.classList.remove(config.errorClass);
   errorElement.textContent = '';
 };
 
 const checkInputValidity = (formElement, inputElement, config) => {
   if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage, config.inputErrorClass, config.errorClass);
+    showInputError(formElement, inputElement, inputElement.validationMessage, config);
   } else {
-    hideInputError(formElement, inputElement, config.inputErrorClass, config.errorClass)
+    hideInputError(formElement, inputElement, config)
   }
 };
 
@@ -68,11 +68,11 @@ function toggleButtonState(inputList, buttonElement, inactiveButtonClass) {
   }
 }
 
-const hideErrors = (formElement, inputSelector, inputErrorClass, errorClass) => {
-  const inputList = Array.from(formElement.querySelectorAll(inputSelector));
+const hideErrors = (formElement, config) => {
+  const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
 
   inputList.forEach((inputElement) => {
-    hideInputError(formElement, inputElement, inputErrorClass, errorClass);
+    hideInputError(formElement, inputElement, config);
   });
 };
 

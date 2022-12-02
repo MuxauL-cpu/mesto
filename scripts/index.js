@@ -100,13 +100,13 @@ function handleOpenProfileForm() {
   openPopup(popupUser);
   nameInput.value = userName.textContent;
   jobInput.value = userJob.textContent;
-  hideErrors(popupUser, validationConfig.inputSelector, validationConfig.inputErrorClass, validationConfig.errorClass);
+  hideErrors(popupUser, validationConfig);
 }
 
 function handleOpenAddCardForm() {
   openPopup(popupAddCard);
   popupAddCardForm.reset();
-  hideErrors(popupAddCard, validationConfig.inputSelector, validationConfig.inputErrorClass, validationConfig.errorClass);
+  hideErrors(popupAddCard, validationConfig);
   disableSubmitButton(cardButtonSubmit, validationConfig.inactiveButtonClass);
 }
 
