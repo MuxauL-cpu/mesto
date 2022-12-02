@@ -100,14 +100,13 @@ function handleOpenProfileForm() {
   openPopup(popupUser);
   nameInput.value = userName.textContent;
   jobInput.value = userJob.textContent;
-  hideErrors(popupUser, validationConfig.inputSelector);
-  disableSubmitButton(userButtonSubmit, validationConfig.inactiveButtonClass);
+  hideErrors(popupUser, validationConfig.inputSelector, validationConfig.inputErrorClass, validationConfig.errorClass);
 }
 
 function handleOpenAddCardForm() {
   openPopup(popupAddCard);
   popupAddCardForm.reset();
-  hideErrors(popupAddCard, validationConfig.inputSelector);
+  hideErrors(popupAddCard, validationConfig.inputSelector, validationConfig.inputErrorClass, validationConfig.errorClass);
   disableSubmitButton(cardButtonSubmit, validationConfig.inactiveButtonClass);
 }
 
@@ -136,7 +135,6 @@ const buttonCardsClose = popupAddCard.querySelector('.popup__button-close');
 
 function handleCloseAddCardForm() {
   closePopup(popupAddCard);
-  disableSubmitButton(cardButtonSubmit, validationConfig.inactiveButtonClass);
 }
 
 function handlerClosePopupUserForm() {
