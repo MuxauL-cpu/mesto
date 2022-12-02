@@ -21,11 +21,11 @@ const hideInputError = (formElement, inputElement, inputErrorClass, errorClass) 
   errorElement.textContent = '';
 };
 
-const checkInputValidity = (formElement, inputElement, inputErrorClass, errorClass) => {
+const checkInputValidity = (formElement, inputElement, config) => {
   if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage, inputErrorClass, errorClass);
+    showInputError(formElement, inputElement, inputElement.validationMessage, config.inputErrorClass, config.errorClass);
   } else {
-    hideInputError(formElement, inputElement, inputErrorClass, errorClass)
+    hideInputError(formElement, inputElement, config.inputErrorClass, config.errorClass)
   }
 };
 
@@ -37,7 +37,7 @@ const setEventListeners = (formElement, config) => {
   
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', function() {
-      checkInputValidity(formElement, inputElement, config.inputErrorClass, config.errorClass);
+      checkInputValidity(formElement, inputElement, config);
       toggleButtonState(inputList, buttonElement, config.inactiveButtonClass);
     });
   });
