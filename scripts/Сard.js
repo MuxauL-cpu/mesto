@@ -1,4 +1,4 @@
-import { openPopup, popupOpenImage, popupImage, popupFigcaption, closePopup } from "./index.js";
+import { openPopup, popupOpenImage, popupImage, popupFigcaption } from "./index.js";
 
 export class Card {
   constructor(data, templateSelector) {
@@ -17,6 +17,7 @@ export class Card {
     return cardElement;
   } 
 
+  //публичный метод для генерации карточек
   generateCard() {
     this._element = this._getTemplate();
     this._setEventListeners();
@@ -31,14 +32,17 @@ export class Card {
     return this._element;
   }
 
+  //функция для кнопки лайка
   _handleLikeClick() {
     this._cardLikeButton.classList.toggle('elements__button-like_enabled');
   }
 
+  //функция для кнопки удаления карточки
   _handleDeleteClick() {
     this._element.closest('.elements__card').remove();
   }
 
+  //функция открытия карточки
   _handleOpenClick() {
     popupImage.src = this._link;
     popupImage.alt = this._name;

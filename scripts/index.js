@@ -15,14 +15,12 @@ const userJob = content.querySelector('.profile__job');
 //определение переменных pop-up, кнопки сохранения, закрыть. Переменные для изменения имени и работы пользователя
 const popupUser = document.querySelector('.popup_type_user');
 const popupUserForm = popupUser.querySelector('.popup__form');
-const userButtonSubmit = popupUser.querySelector('.popup__button-submit_type_user');
 const nameInput = popupUser.querySelector('.popup__input_type_name');
 const jobInput = popupUser.querySelector('.popup__input_type_job');
 
 //определение переменных для pop-up, который добавляет картинки
 const popupAddCard = document.querySelector('.popup_type_card-editor');
 const popupAddCardForm = popupAddCard.querySelector('.popup__form_type_cards');
-const cardButtonSubmit = popupAddCard.querySelector('.popup__button-submit_type_cards');
 const imageDescription = popupAddCard.querySelector('.popup__input_type_description');
 const imageLink = popupAddCard.querySelector('.popup__input_type_link');
 
@@ -36,9 +34,11 @@ const buttonClose = popupUser.querySelector('.popup__button-close');
 const popupCloseImage = popupOpenImage.querySelector('.popup__button-close');
 const buttonCardsClose = popupAddCard.querySelector('.popup__button-close');
 
+//экземпляры классов валидации форм
 const cardValidation = new FormValidator(validationConfig, popupAddCard);
 const userValidation = new FormValidator(validationConfig, popupUser);
 
+//вызов валидации для форм с полями
 cardValidation.enableValidation();
 userValidation.enableValidation();
 
@@ -98,6 +98,7 @@ const handleSubmitAddCardForm = (evt) => {
     name: imageDescription.value,
     link: imageLink.value
   }, '#elements'));
+  
   handleCloseAddCardForm();
 };
   
@@ -140,4 +141,4 @@ initialCards.forEach((item) => {
   cardsContainer.prepend(cardGenerate);
 });
 
-export {cardsContainer, popupOpenImage, popupImage, popupFigcaption, openPopup, closePopup};
+export {popupOpenImage, popupImage, popupFigcaption, openPopup};
