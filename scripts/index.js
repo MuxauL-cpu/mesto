@@ -1,6 +1,12 @@
+import { Card } from "./Сard.js";
+import { FormValidator } from "./FormValidator.js";
+import { initialCards } from "./cards.js";
+import { validationConfig } from "./validationConfig.js";
+
 const content = document.querySelector('.content');
 const profileButton = content.querySelector('.profile__button');
 const newCardButton = content.querySelector('.profile__button-add');
+const cardsContainer = content.querySelector('.photo-grid__list');
 
 //переменные для вставки в pop-up при открытии
 const userName = content.querySelector('.profile__name');
@@ -23,7 +29,18 @@ const imageLink = popupAddCard.querySelector('.popup__input_type_link');
 //определение переменных для popup, который открывает карточки
 const popupOpenImage = document.querySelector('.popup_type_open-image');
 const popupImage = popupOpenImage.querySelector('.popup__image');
-const popupCaption = popupOpenImage.querySelector('.popup__figcaption');
+const popupFigcaption = popupOpenImage.querySelector('.popup__figcaption');
+
+//определение переменных для кнопок закрытия
+const buttonClose = popupUser.querySelector('.popup__button-close');
+const popupCloseImage = popupOpenImage.querySelector('.popup__button-close');
+const buttonCardsClose = popupAddCard.querySelector('.popup__button-close');
+
+const cardValidation = new FormValidator(validationConfig, popupAddCard);
+const userValidation = new FormValidator(validationConfig, popupUser);
+
+cardValidation.enableValidation();
+userValidation.enableValidation();
 
 //функция закрытия формы по кнопке esc
 const handleEscClick = (evt) => {
@@ -54,68 +71,33 @@ const closePopup = (popup) => {
   popup.removeEventListener('click', closePopupOverlay);
 };
 
-const cardsContainer = content.querySelector('.photo-grid__list');
-
-const cardTemplate = document.querySelector('#elements').content.querySelector('.elements__card');
-
-const generateCard = (cardData) => {
-  const newCard = cardTemplate.cloneNode(true);
-
-  const cardImage = newCard.querySelector('.elements__image');
-  cardImage.src = cardData.link;
-  cardImage.alt = cardData.name;
-
-  const cardTitle = newCard.querySelector('.elements__description-title');
-  cardTitle.textContent = cardData.name;
-
-  const likeButton = newCard.querySelector('.elements__button-like');
-  likeButton.addEventListener('click', () => {
-    likeButton.classList.toggle('elements__button-like_enabled');
-  });
-
-  newCard.querySelector('.elements__delete-button').addEventListener('click', function(evt) {
-    newCard.remove();
-  });
-
-  const handleOpenImageForm = () => {
-    popupImage.src = cardImage.src;
-    popupImage.alt = cardImage.alt;
-    popupCaption.textContent = cardTitle.textContent;
-
-    openPopup(popupOpenImage);
-  };
-
-  cardImage.addEventListener('click', handleOpenImageForm);
-
-  return newCard;
-}
-
-const renderCard = (cardData) => {
-  cardsContainer.prepend(generateCard(cardData));
-}
-
-initialCards.forEach(renderCard);
 
 function handleOpenProfileForm() {
   openPopup(popupUser);
   nameInput.value = userName.textContent;
   jobInput.value = userJob.textContent;
-  hideErrors(popupUser, validationConfig);
+  userValidation.hideErrors();
 }
 
 function handleOpenAddCardForm() {
   openPopup(popupAddCard);
   popupAddCardForm.reset();
-  hideErrors(popupAddCard, validationConfig);
-  disableSubmitButton(cardButtonSubmit, validationConfig.inactiveButtonClass);
+  cardValidation.hideErrors();
+  cardValidation.disableSubmitButton();
+}
+
+function renderCard(object, template) {
+  const card = new Card(object, template);
+  return card.generateCard();
 }
 
 const handleSubmitAddCardForm = (evt) => {
   evt.preventDefault();
-  renderCard({ 
+
+  cardsContainer.prepend(renderCard({ 
     name: imageDescription.value,
     link: imageLink.value
-  });
+  }, '#elements'));
   handleCloseAddCardForm();
 };
   
@@ -128,18 +110,13 @@ function handleSubmitPopupUserForm(evt) {
   handlerClosePopupUserForm();
 }
 
-//определение переменных для кнопок закрытия
-const buttonClose = popupUser.querySelector('.popup__button-close');
-const popupCloseImage = popupOpenImage.querySelector('.popup__button-close');
-const buttonCardsClose = popupAddCard.querySelector('.popup__button-close');
-
 function handleCloseAddCardForm() {
   closePopup(popupAddCard);
 }
 
 function handlerClosePopupUserForm() {
   closePopup(popupUser);
-  disableSubmitButton(userButtonSubmit, validationConfig.inactiveButtonClass);
+  userValidation.disableSubmitButton();
 }
 
 const handleCloseImage = () => {
@@ -156,3 +133,11 @@ popupAddCardForm.addEventListener('submit', handleSubmitAddCardForm);
 popupCloseImage.addEventListener('click', handleCloseImage);
 buttonClose.addEventListener('click', handlerClosePopupUserForm);
 buttonCardsClose.addEventListener('click', handleCloseAddCardForm);
+
+initialCards.forEach((item) => {
+  const card = new Card(item, '#elements');
+  const cardGenerate = card.generateCard();
+  cardsContainer.prepend(cardGenerate);
+});
+
+export {cardsContainer, popupOpenImage, popupImage, popupFigcaption, openPopup, closePopup};
