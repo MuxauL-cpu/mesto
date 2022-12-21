@@ -1,10 +1,9 @@
-import { openPopup, popupOpenImage, popupImage, popupFigcaption } from "./index.js";
-
 export class Card {
-  constructor(data, templateSelector) {
+  constructor(data, templateSelector, handleCardClick) {
     this._name = data.name;
     this._link = data.link;
     this._templateSelector = templateSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -42,22 +41,13 @@ export class Card {
     this._element.closest('.elements__card').remove();
   }
 
-  //функция открытия карточки
-  _handleOpenClick() {
-    popupImage.src = this._link;
-    popupImage.alt = this._name;
-    popupFigcaption.textContent = this._name;
-
-    openPopup(popupOpenImage);
-  }
-
   _setEventListeners() {
     this._cardLikeButton = this._element.querySelector('.elements__button-like');
     this._cardDeleteButton = this._element.querySelector('.elements__delete-button');
     this._cardImage = this._element.querySelector('.elements__image');
 
     this._cardImage.addEventListener('click', () => {
-      this._handleOpenClick();
+      this._handleCardClick(this._name, this._link)
     });
 
     this._cardLikeButton.addEventListener('click', () => {

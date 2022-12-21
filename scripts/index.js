@@ -29,11 +29,6 @@ const popupOpenImage = document.querySelector('.popup_type_open-image');
 const popupImage = popupOpenImage.querySelector('.popup__image');
 const popupFigcaption = popupOpenImage.querySelector('.popup__figcaption');
 
-//определение переменных для кнопок закрытия
-const buttonClose = popupUser.querySelector('.popup__button-close');
-const popupCloseImage = popupOpenImage.querySelector('.popup__button-close');
-const buttonCardsClose = popupAddCard.querySelector('.popup__button-close');
-
 //экземпляры классов валидации форм
 const cardValidation = new FormValidator(validationConfig, popupAddCard);
 const userValidation = new FormValidator(validationConfig, popupUser);
@@ -86,8 +81,8 @@ function handleOpenAddCardForm() {
   cardValidation.disableSubmitButton();
 }
 
-function renderCard(object, template) {
-  const card = new Card(object, template);
+function renderCard(object, template, handleCardClick) {
+  const card = new Card(object, template, handleCardClick);
   return card.generateCard();
 }
 
@@ -120,10 +115,6 @@ function handlerClosePopupUserForm() {
   userValidation.disableSubmitButton();
 }
 
-const handleCloseImage = () => {
-  closePopup(popupOpenImage);
-}
-
 //привязка функций к кнопкам
 profileButton.addEventListener('click', handleOpenProfileForm);
 popupUserForm.addEventListener('submit', handleSubmitPopupUserForm);
@@ -131,14 +122,21 @@ popupUserForm.addEventListener('submit', handleSubmitPopupUserForm);
 newCardButton.addEventListener('click', handleOpenAddCardForm);
 popupAddCardForm.addEventListener('submit', handleSubmitAddCardForm);
 
-popupCloseImage.addEventListener('click', handleCloseImage);
-buttonClose.addEventListener('click', handlerClosePopupUserForm);
-buttonCardsClose.addEventListener('click', handleCloseAddCardForm);
+const closeButtons = document.querySelectorAll('.popup__button-close');
+closeButtons.forEach((button) => {
+  const popup = button.closest('.popup');
 
-initialCards.forEach((item) => {
-  const card = new Card(item, '#elements');
-  const cardGenerate = card.generateCard();
-  cardsContainer.prepend(cardGenerate);
+  button.addEventListener('click', () => closePopup(popup));
 });
 
-export {popupOpenImage, popupImage, popupFigcaption, openPopup};
+function handleCardClick(name, link) {
+  popupImage.src = link;
+  popupImage.alt = name;
+  popupFigcaption.textContent = name;
+
+  openPopup(popupOpenImage);
+}
+
+initialCards.forEach((item) => {
+  cardsContainer.prepend(renderCard(item, '#elements', handleCardClick));
+});
