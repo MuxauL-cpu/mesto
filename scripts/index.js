@@ -92,7 +92,7 @@ const handleSubmitAddCardForm = (evt) => {
   cardsContainer.prepend(renderCard({ 
     name: imageDescription.value,
     link: imageLink.value
-  }, '#elements'));
+  }, '#elements', handleCardClick));
   
   handleCloseAddCardForm();
 };
