@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Mesto">
+  <meta name="keywords" content="JavaScript">
+  <meta name="author" content="Максименко Михаил">
+  <link rel="stylesheet" href="./pages/index.css">
+  <title>Mesto</title>
+</head>
+<body class="root">
+  <div class="page">
+    <header class="header">
+      <img src="images/mesto_logo.svg" class="header__logo" alt="Mesto лого">
+    </header>
+    <main class="content">
+      <section class="profile">
+        <img src="images/avatar.png" class="profile__avatar" alt="Аватар профиля">
+        <div class="profile__info">
+          <div class="profile__name-container">
+            <h1 class="profile__name">Жак-Ив Кусто</h1>
+            <button type="button" aria-label="Редактирование профиля" class="profile__button"></button>
+          </div>
+          <p class="profile__job">Исследователь океана</p>
+        </div>
+        <button type="button" aria-label="Добавить новую картинку" class="profile__button-add"></button>
+      </section>
+      <section class="photo-grid">
+        <ul class="photo-grid__list">
+        </ul>
+      </section>
+    </main>
+    <footer class="footer">
+      <p class="footer__author">© 2022 Максименко Михаил</p>
+    </footer>
+    <!--popup для редактирования информации профиля-->
+    <section class="popup popup_type_user">
+      <div class="popup__container">
+        <h2 class="popup__header">Редактировать профиль</h2>
+        <form class="popup__form" name="popupForm" novalidate>
+          <label for="user-name" class="popup__label"></label>
+            <input class="popup__input popup__input_type_name" placeholder="Имя" name="UserName" id="user-name" minlength="2" maxlength="40" required>
+            <p class="user-name-error popup__input-error"></p>
+          <label for="user-job" class="popup__label">
+            <input class="popup__input popup__input_type_job" placeholder="О себе" name="UserJob" id="user-job" minlength="2" maxlength="200" required>
+            <p class="user-job-error popup__input-error"></p>
+          </label>
+          <button type="submit" class="popup__button-submit popup__button-submit_type_user">Сохранить</button>
+        </form>
+        <button type="button" aria-label="Закрыть" class="popup__button-close"></button>
+      </div>
+    </section>
+    <!--popup для добавления карточек-->
+    <section class="popup popup_type_card-editor">
+      <div class="popup__container">
+        <h2 class="popup__header">Новое место</h2>
+        <form class="popup__form popup__form_type_cards" name="popupCardsForm" novalidate>
+          <label for="image-description" class="popup__label">
+            <input class="popup__input popup__input_type_description" placeholder="Название" name="imageDescription" id="image-description" minlength="2" maxlength="30" required>
+            <p class="image-description-error popup__input-error"></p>
+          </label>
+          <label for="image-link" class="popup__label">
+            <input class="popup__input popup__input_type_link" type="url" placeholder="Ссылка на картинку" name="imageLink" id="image-link" required>
+            <p class="image-link-error popup__input-error"></p>
+          </label>
+          <button type="submit" class="popup__button-submit popup__button-submit_type_cards">Создать</button>
+        </form>
+        <button type="button" aria-label="Закрыть" class="popup__button-close"></button>
+      </div>
+    </section>
+    <!--popup который открывает карточку-->
+    <section class="popup popup_type_open-image">
+      <figure class="popup__figure">
+        <button type="button" aria-label="Закрыть" class="popup__button-close"></button>
+        <img src="#" class="popup__image">
+        <figcaption class="popup__figcaption"></figcaption>
+      </figure>
+    </section>
+  </div>
+  <!--шаблон для создания каточек-->
+  <template id="elements">
+    <li class="elements__card">
+      <img src="#" class="elements__image" alt="">
+      <button type="button" aria-label="Delete" class="elements__delete-button"></button>
+      <div class="elements__description-container">
+        <h2 class="elements__description-title"></h2>
+        <button type="button" aria-label="Лайк" class="elements__button-like"></button>
+      </div>
+    </li>
+  </template>
+  <script defer type="module" src="scripts/cards.js"></script>
+  <script defer type="module" src="scripts/validationConfig.js"></script>
+  <script defer type="module" src="scripts/FormValidator.js"></script>
+  <script defer type="module" src="scripts/index.js"></script>
+  <script defer type="module" src="scripts/Сard.js"></script>
+</body>
+</html>
