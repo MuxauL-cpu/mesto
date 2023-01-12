@@ -1,8 +1,0 @@
-.card__description-container {
-  display: flex;
-  justify-content: space-between;
-  background-color: #fff;
-  color: #000;
-  padding: 24px;
-  border-radius: 0 0 10px 10px;
-}
